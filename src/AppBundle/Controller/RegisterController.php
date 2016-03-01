@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class LoginController extends Controller
+class RegisterController extends Controller
 {
 
     /**
-     * @Route("/")
-     * @Template("BlogBundle:Default:base.html.twig")
+     * @Route("/register")
+     * @Template("AppBundle:base.html.twig")
      */
     public function indexAction()
     {
