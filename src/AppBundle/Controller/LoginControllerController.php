@@ -7,4 +7,5 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class LoginControllerController extends Controller
 {
+    
 }
