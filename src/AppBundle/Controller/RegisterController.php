@@ -11,7 +11,7 @@ class RegisterController extends Controller
 
     /**
      * @Route("/register")
-     * @Template("AppBundle:base.html.twig")
+     * @Template("AppBundle:register.html.twig")
      */
     public function indexAction()
     {
