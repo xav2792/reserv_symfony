@@ -1,4 +1,9 @@
 user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
     resource: "@AppBundle/Controller/"
     type:     annotation
     prefix:   /
@@ -9,3 +14,5 @@ app:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
