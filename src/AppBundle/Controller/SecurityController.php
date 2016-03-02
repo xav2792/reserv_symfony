@@ -32,7 +32,7 @@ class SecurityController extends Controller
             $em = $this->getDoctrine()->getManager();
             //$em->persist($user);
             //$em->flush();
-          //  return $this->redirectToRoute('task_success');
+            //return $this->redirectToRoute('task_success');
         }
 
         return  array('form' => $form->createView());
