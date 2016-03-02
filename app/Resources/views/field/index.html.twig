@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Field list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for field in fields %}
+            <tr>
+                <td><a href="{{ path('field_show', { 'id': field.id }) }}">{{ field.id }}</a></td>
+                <td>{{ field.name }}</td>
+                <td>{{ field.type }}</td>
+                <td>{{ field.description }}</td>
+                <td>{{ field.location }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('field_show', { 'id': field.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('field_edit', { 'id': field.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('field_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
