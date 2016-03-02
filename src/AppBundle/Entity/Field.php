@@ -19,7 +19,13 @@ class Field
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="field", cascade={"remove", "persist"})
+     */
+    protected $reservations;
+
 
     /**
      * @var string
@@ -49,6 +55,10 @@ class Field
      */
     private $location;
 
+
+    public function __construct() {
+    $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+}
 
     /**
      * Get id
@@ -155,5 +165,38 @@ class Field
     {
         return $this->location;
     }
-}
 
+    /**
+     * Add reservation
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return Field
+     */
+    public function addReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     */
+    public function removeReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations->removeElement($reservation);
+    }
+
+    /**
+     * Get reservations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+}

@@ -25,6 +25,11 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="user", cascade={"remove"})
+     */
+    protected $reservations;
+
 
 
 
@@ -39,6 +44,8 @@ class User extends BaseUser
     public  function __construct(){
         $this->dateCreated=new \DateTime();
         parent::__construct();
+        $this->fields = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
 
     /**
@@ -78,5 +85,38 @@ class User extends BaseUser
     }
 
 
-}
 
+    /**
+     * Add reservation
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return User
+     */
+    public function addReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     */
+    public function removeReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations->removeElement($reservation);
+    }
+
+    /**
+     * Get reservations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+}

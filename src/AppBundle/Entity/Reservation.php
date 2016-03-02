@@ -22,18 +22,14 @@ class Reservation
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_field", type="integer")
+     *@ORM\ManyToOne(targetEntity="Field", inversedBy="reservations", cascade={"remove", "persist"})
      */
-    private $idField;
+    private $field;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="fields", cascade={"remove"})
      */
-    private $idUser;
+    private $user;
 
     /**
      * @var \DateTime
@@ -155,5 +151,52 @@ class Reservation
     {
         return $this->hour;
     }
-}
 
+    /**
+     * Set field
+     *
+     * @param \AppBundle\Entity\Field $field
+     *
+     * @return Reservation
+     */
+    public function setField(\AppBundle\Entity\Field $field = null)
+    {
+        $this->field = $field;
+
+        return $this;
+    }
+
+    /**
+     * Get field
+     *
+     * @return \AppBundle\Entity\Field
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Reservation
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

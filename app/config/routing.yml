@@ -1,3 +1,7 @@
+app_reservation:
+    resource: "@AppBundle/Controller/ReservationController.php"
+    type:     annotation
+
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
