@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 class UserType extends AbstractType
 {
     /**
@@ -17,8 +20,10 @@ class UserType extends AbstractType
         $builder
             ->add('name')
             ->add('password')
+            ->add('save', SubmitType::class, array('label' => 'Create Task'))
 
         ;
+
     }
     
     /**
