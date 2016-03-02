@@ -9,6 +9,7 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        <a href="{{ path('field_index') }}">Liste des terrains</a>
+        <a href="{{ path('field_index') }}">Liste des terrains</a></br>
+        <a href="{{ path('fos_user_security_logout') }}">Se deconnecter</a>
         {% block javascripts %}{% endblock %}
     </body>
