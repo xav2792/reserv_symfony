@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
-class UserType extends AbstractType
+class LoginType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,13 +21,12 @@ class UserType extends AbstractType
         $builder
             ->add('username')
             ->add('password')
-            ->add('email')
             ->add('save', SubmitType::class, array('label' => 'Create'))
 
 
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

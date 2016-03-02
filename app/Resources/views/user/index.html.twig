@@ -7,8 +7,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Password</th>
                 <th>Datecreated</th>
                 <th>Actions</th>
             </tr>
@@ -17,8 +15,6 @@
         {% for user in users %}
             <tr>
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.password }}</td>
                 <td>{% if user.dateCreated %}{{ user.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                     <ul>

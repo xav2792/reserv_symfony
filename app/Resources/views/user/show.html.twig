@@ -10,14 +10,6 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ user.name }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
                 <th>Datecreated</th>
                 <td>{% if user.dateCreated %}{{ user.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
