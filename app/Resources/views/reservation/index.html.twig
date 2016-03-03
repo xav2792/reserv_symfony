@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Reservation list</h1>
+    <h1>Liste des reservations</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Date</th>
-                <th>Hour</th>
+                <th>Heure</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,10 +21,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('reservation_show', { 'id': reservation.id }) }}">show</a>
+                            <a href="{{ path('reservation_show', { 'id': reservation.id }) }}">VOIR</a>
                         </li>
                         <li>
-                            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}">edit</a>
+                            <a href="{{ path('reservation_edit', { 'id': reservation.id }) }}">VOIR</a>
                         </li>
                     </ul>
                 </td>
@@ -35,7 +35,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('reservation_new') }}">Create a new entry</a>
+            <a href="{{ path('reservation_new') }}">Créer un nouveau terrain</a>
         </li>
     </ul>
 {% endblock %}
