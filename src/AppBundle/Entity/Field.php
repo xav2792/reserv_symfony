@@ -22,7 +22,7 @@ class Field
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="field", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="field", cascade={"refresh"})
      */
     protected $reservations;
 

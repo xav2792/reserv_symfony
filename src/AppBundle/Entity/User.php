@@ -26,7 +26,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="user", cascade={"refresh"})
      */
     protected $reservations;
 

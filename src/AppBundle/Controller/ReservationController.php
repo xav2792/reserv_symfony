@@ -9,6 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Reservation;
 use AppBundle\Form\ReservationType;
 
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+
 /**
  * Reservation controller.
  *
@@ -41,6 +45,7 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
+
         $reservation = new Reservation();
         $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
         $form->handleRequest($request);
@@ -49,8 +54,9 @@ class ReservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
-            
-            $this->get('app.mailer')->sendMail($args);
+
+
+            //$this->get('app.mailer')->sendMail($args);
             
             return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
         }

@@ -22,12 +22,12 @@ class Reservation
     private $id;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Field", inversedBy="reservations", cascade={"remove", "persist"})
+     *@ORM\ManyToOne(targetEntity="Field", inversedBy="reservations", cascade={"refresh"})
      */
     private $field;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="fields", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="fields", cascade={"refresh"})
      */
     private $user;
 

@@ -118,16 +118,20 @@ class FieldController extends Controller
      */
     public function deleteAction(Request $request, Field $field)
     {
-        $form = $this->createDeleteForm($field);
-        $form->handleRequest($request);
+        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $form = $this->createDeleteForm($field);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($field);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($field);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('field_index');
+        }else{
+            return $this->render('field/error.html.twig');
         }
-
-        return $this->redirectToRoute('field_index');
     }
 
     /**
