@@ -8,25 +8,21 @@ class Mailer {
 
     protected $mailer;
 
-    public function __construct(Mailer $mailer) 
+    public function __construct(Swift_Mailer $mailer)
     {
         $this->mailer = $mailer;
     }
 
     public function sendMail($to, $field, $date, $hour, $user) 
     {
-        $message = $this->mailer
+        $message = \Swift_Message::newInstance()
                 ->setSubject('Hello Email')
                 ->setFrom('send@example.com')
-                ->setTo($to)
-                ->setBody(
-                $this->renderView(
-                        'Emails/registration.html.twig', array('name' => $name)
-                ), 'text/html'
-        );
-        $this->get('mailer')->send($message);
+                ->setTo($to);
 
-        return;
+        $message->setBody('ok');
+
+        return $this->mailer->send($message);
     }
 
 }
