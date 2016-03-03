@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Field list</h1>
+    <h1>Liste des terrains</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Nom du terrain</th>
                 <th>Type</th>
                 <th>Description</th>
                 <th>Location</th>
@@ -30,10 +30,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('field_show', { 'id': field.id }) }}">show</a>
+                            <a href="{{ path('field_show', { 'id': field.id }) }}">VOIR</a>
                         </li>
                         <li>
-                            <a href="{{ path('field_edit', { 'id': field.id }) }}">edit</a>
+                            <a href="{{ path('field_edit', { 'id': field.id }) }}">EDITER</a>
                         </li>
                     </ul>
                 </td>
@@ -44,7 +44,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('field_new') }}">Create a new entry</a>
+            <a href="{{ path('field_new') }}">Créer une nouvelle entrée</a>
         </li>
     </ul>
 {% endblock %}

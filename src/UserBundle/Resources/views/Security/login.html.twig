@@ -8,6 +8,8 @@
     {% endif %}
     <a href="{{ path('fos_user_registration_register') }}">S'inscire</a>
 
+    
+    
     <form action="{{ path("fos_user_security_check") }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
@@ -22,4 +24,5 @@
 
         <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
     </form>
+        
 {% endblock fos_user_content %}
