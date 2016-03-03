@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Modifier une reservation</h1>
-
+    <h1>Reservation edit</h1>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('reservation_index') }}">Retour à la liste</a>
+            <a href="{{ path('reservation_index') }}">Back to the list</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

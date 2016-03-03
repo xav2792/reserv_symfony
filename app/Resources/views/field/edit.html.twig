@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Editer</h1>
-
+    <h1>Field edit</h1>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
@@ -14,7 +14,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('field_index') }}">Retour à la liste</a>
+            <a href="{{ path('field_index') }}">Back to the list</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

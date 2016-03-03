@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Créer une reservation</h1>
-
+    <h1>Reservation creation</h1>
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('reservation_index') }}">Retour à la liste</a>
+            <a href="{{ path('reservation_index') }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}
