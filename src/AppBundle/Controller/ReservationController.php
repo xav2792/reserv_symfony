@@ -49,7 +49,9 @@ class ReservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($reservation);
             $em->flush();
-
+            
+            $this->get('app.mailer')->sendMail($args);
+            
             return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
         }
 
