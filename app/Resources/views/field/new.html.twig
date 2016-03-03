@@ -1,3 +1,4 @@
+{% if is_granted('ROLE_ADMIN') %}
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
@@ -19,3 +20,4 @@
         </li>
     </ul>
 {% endblock %}
+{% endif %}
