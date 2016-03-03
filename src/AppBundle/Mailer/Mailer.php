@@ -21,7 +21,7 @@ class Mailer {
                 ->setTo($to)
                 ->setBody(
                 $this->renderView(
-                        'Emails/registration.html.twig', array('name' => $name)
+                        'reservation/reservationmanager.html.twig', array('name' => $name)
                 ), 'text/html'
         );
         $this->get('mailer')->send($message);
