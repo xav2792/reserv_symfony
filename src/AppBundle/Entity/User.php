@@ -32,8 +32,6 @@ class User extends BaseUser
 
 
 
-
-
     /**
      * @var \DateTime
      *

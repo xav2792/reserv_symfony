@@ -1,3 +1,4 @@
+{% if is_granted('ROLE_ADMIN') %}
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
@@ -6,7 +7,7 @@
 
 
 {% block body %}
-    <h1>Field creation</h1>
+    <h1>Ajouter un terrain</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -15,7 +16,8 @@
 
     <ul>
         <li>
-            <a href="{{ path('field_index') }}">Back to the list</a>
+            <a href="{{ path('field_index') }}">Retour à la liste</a>
         </li>
     </ul>
 {% endblock %}
+{% endif %}
