@@ -18,7 +18,7 @@ class FieldType extends AbstractType
             ->add('name')
             ->add('type')
             ->add('description')
-            ->add('location')
+            ->add('location')        
         ;
     }
     
