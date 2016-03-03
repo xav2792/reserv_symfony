@@ -41,22 +41,26 @@ class FieldController extends Controller
      */
     public function newAction(Request $request)
     {
-        $field = new Field();
-        $form = $this->createForm('AppBundle\Form\FieldType', $field);
-        $form->handleRequest($request);
+        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $field = new Field();
+            $form = $this->createForm('AppBundle\Form\FieldType', $field);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($field);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($field);
+                $em->flush();
 
-            return $this->redirectToRoute('field_show', array('id' => $field->getId()));
+                return $this->redirectToRoute('field_show', array('id' => $field->getId()));
+            }
+
+            return $this->render('field/new.html.twig', array(
+                'field' => $field,
+                'form' => $form->createView(),
+            ));
+        }else{
+            return $this->render('field/error.html.twig');
         }
-
-        return $this->render('field/new.html.twig', array(
-            'field' => $field,
-            'form' => $form->createView(),
-        ));
     }
 
     /**
@@ -83,6 +87,7 @@ class FieldController extends Controller
      */
     public function editAction(Request $request, Field $field)
     {
+        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
         $deleteForm = $this->createDeleteForm($field);
         $editForm = $this->createForm('AppBundle\Form\FieldType', $field);
         $editForm->handleRequest($request);
@@ -100,6 +105,9 @@ class FieldController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+        }else{
+            return $this->render('field/error.html.twig');
+        }
     }
 
     /**

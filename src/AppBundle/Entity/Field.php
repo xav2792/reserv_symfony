@@ -199,4 +199,9 @@ class Field
     {
         return $this->reservations;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
