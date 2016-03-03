@@ -2,11 +2,13 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-<link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/css/styles.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body %}
     <h1>Liste des terrains</h1>
+    
+
 
     <table>
         <thead>
@@ -44,7 +46,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('field_new') }}">Créer une nouvelle entrée</a>
+            <a href="{{ path('field_new') }}">Crï¿½er une nouvelle entrï¿½e</a>
         </li>
     </ul>
 {% endblock %}
