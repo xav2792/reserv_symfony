@@ -32,3 +32,10 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+
+# app/config/config_dev.yml
+swiftmailer:
+    transport: gmail
+    username:  your_gmail_username
+    password:  your_gmail_password
