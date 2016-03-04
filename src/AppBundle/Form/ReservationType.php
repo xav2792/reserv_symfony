@@ -21,13 +21,24 @@ class ReservationType extends AbstractType
 
         $builder
             ->add('date')
-            ->add('hour',TextType::class,array('label'=>'Choisir une heure de debut (une reservation dure une heure)'))
+            ->add('hour', ChoiceType::class, array('choices'  => array(
++                '9' => 9,
++                '10' => 10,
++                '11' => 11,
++                '12' => 12,
++                '13' => 13,
++                '14' => 14,
++                '15' => 15,
++                '16' => 16,
++                '17' => 17,
++                '18' => 18,
++                '19' => 19)))
             ->add('field')
             ->add('user')
 
 
         ;
-        /*,ChoiceType::class,array('label'=>'Choisir une heure de début (une réservation dure une heure) ',
+        /*,ChoiceType::class,array('label'=>'Choisir une heure de dï¿½but (une rï¿½servation dure une heure) ',
         'multiple'=>true,
                 'choices'=>array(9=>'9', 10=>'10', 11=>'11' , 12=>'12' , 13=>'13' , 14>'14' , 15=>'15', 16=>'16', 17=>'17'),
                 'attr'=>array('style'=>'width:100px', 'customattr'=>'customdata')))*/
