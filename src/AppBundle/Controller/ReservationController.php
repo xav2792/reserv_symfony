@@ -24,13 +24,13 @@ class ReservationController extends Controller
      */
     public function indexAction()
     {
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-            $reservations = $em->getRepository('AppBundle:Reservation')->findByUser($this->getUser());
+        $reservations = $em->getRepository('AppBundle:Reservation')->findByUser($this->getUser());
 
-            return $this->render('reservation/index.html.twig', array(
-                'reservations' => $reservations,
-            ));
+        return $this->render('reservation/index.html.twig', array(
+            'reservations' => $reservations,
+        ));
 
 
     }
@@ -43,13 +43,13 @@ class ReservationController extends Controller
      */
     public function allAction()
     {
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-            $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
+        $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
 
-            return $this->render('reservation/index.html.twig', array(
-                'reservations' => $reservations,
-            ));
+        return $this->render('reservation/index.html.twig', array(
+            'reservations' => $reservations,
+        ));
 
 
     }
@@ -62,26 +62,26 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
-            $reservation = new Reservation();
-            $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
-            $form->handleRequest($request);
+        $reservation = new Reservation();
+        $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-                $reservationManager = $this->get('app.reservation.manager');
+            $reservationManager = $this->get('app.reservation.manager');
 
-                if($reservationManager->createReservation($reservation, $this->getUser())) {
-                   // $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
-                    return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
-                } else {
-                    return $this->render('reservation/error.html.twig');
-                }
+            if ($reservationManager->createReservation($reservation, $this->getUser())) {
+                // $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
+                return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
+            } else {
+                return $this->render('reservation/error.html.twig');
             }
+        }
 
-            return $this->render('reservation/new.html.twig', array(
-                'reservation' => $reservation,
-                'form' => $form->createView(),
-            ));
+        return $this->render('reservation/new.html.twig', array(
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -108,7 +108,7 @@ class ReservationController extends Controller
      */
     public function editAction(Request $request, Reservation $reservation)
     {
-        if($this->getUser() == $reservation->getUser() || $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->getUser() == $reservation->getUser() || $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $deleteForm = $this->createDeleteForm($reservation);
             $editForm = $this->createForm('AppBundle\Form\ReservationType', $reservation);
             $editForm->handleRequest($request);
@@ -126,7 +126,7 @@ class ReservationController extends Controller
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView(),
             ));
-        }else{
+        } else {
             return $this->render('field/error.html.twig');
         }
     }
@@ -139,7 +139,7 @@ class ReservationController extends Controller
      */
     public function deleteAction(Request $request, Reservation $reservation)
     {
-        if($this->getUser() == $reservation->getUser() || $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->getUser() == $reservation->getUser() || $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $form = $this->createDeleteForm($reservation);
             $form->handleRequest($request);
 
@@ -150,7 +150,7 @@ class ReservationController extends Controller
             }
 
             return $this->redirectToRoute('reservation_index');
-        }else{
+        } else {
             return $this->render('field/error.html.twig');
         }
 
@@ -168,7 +168,6 @@ class ReservationController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('reservation_delete', array('id' => $reservation->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

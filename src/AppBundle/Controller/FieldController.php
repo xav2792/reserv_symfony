@@ -42,7 +42,7 @@ class FieldController extends Controller
      */
     public function newAction(Request $request)
     {
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $field = new Field();
             $form = $this->createForm('AppBundle\Form\FieldType', $field);
             $form->handleRequest($request);
@@ -59,7 +59,7 @@ class FieldController extends Controller
                 'field' => $field,
                 'form' => $form->createView(),
             ));
-        }else{
+        } else {
             return $this->render('field/error.html.twig');
         }
     }
@@ -88,25 +88,25 @@ class FieldController extends Controller
      */
     public function editAction(Request $request, Field $field)
     {
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-        $deleteForm = $this->createDeleteForm($field);
-        $editForm = $this->createForm('AppBundle\Form\FieldType', $field);
-        $editForm->handleRequest($request);
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $deleteForm = $this->createDeleteForm($field);
+            $editForm = $this->createForm('AppBundle\Form\FieldType', $field);
+            $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($field);
-            $em->flush();
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($field);
+                $em->flush();
 
-            return $this->redirectToRoute('field_edit', array('id' => $field->getId()));
-        }
+                return $this->redirectToRoute('field_edit', array('id' => $field->getId()));
+            }
 
-        return $this->render('field/edit.html.twig', array(
-            'field' => $field,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-        }else{
+            return $this->render('field/edit.html.twig', array(
+                'field' => $field,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        } else {
             return $this->render('field/error.html.twig');
         }
     }
@@ -119,7 +119,7 @@ class FieldController extends Controller
      */
     public function deleteAction(Request $request, Field $field)
     {
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $form = $this->createDeleteForm($field);
             $form->handleRequest($request);
 
@@ -130,7 +130,7 @@ class FieldController extends Controller
             }
 
             return $this->redirectToRoute('field_index');
-        }else{
+        } else {
             return $this->render('field/error.html.twig');
         }
     }
@@ -147,7 +147,6 @@ class FieldController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('field_delete', array('id' => $field->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
