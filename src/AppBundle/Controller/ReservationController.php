@@ -24,16 +24,6 @@ class ReservationController extends Controller
      */
     public function indexAction()
     {
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $em = $this->getDoctrine()->getManager();
-
-            $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
-
-            return $this->render('reservation/index.html.twig', array(
-                'reservations' => $reservations,
-            ));
-        }else
-        {
             $em = $this->getDoctrine()->getManager();
 
             $reservations = $em->getRepository('AppBundle:Reservation')->findByUser($this->getUser());
@@ -41,7 +31,7 @@ class ReservationController extends Controller
             return $this->render('reservation/index.html.twig', array(
                 'reservations' => $reservations,
             ));
-        }
+
 
     }
 
@@ -72,6 +62,7 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
+
             $reservation = new Reservation();
             $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
             $form->handleRequest($request);
