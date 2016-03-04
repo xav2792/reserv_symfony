@@ -24,13 +24,25 @@ class ReservationController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $em = $this->getDoctrine()->getManager();
 
-        $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
+            $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
 
-        return $this->render('reservation/index.html.twig', array(
-            'reservations' => $reservations,
-        ));
+            return $this->render('reservation/index.html.twig', array(
+                'reservations' => $reservations,
+            ));
+        }else
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $reservations = $em->getRepository('AppBundle:Reservation')->findByUser($this->getUser());
+
+            return $this->render('reservation/index.html.twig', array(
+                'reservations' => $reservations,
+            ));
+        }
+
     }
 
     /**
@@ -41,24 +53,26 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
-        $reservation = new Reservation();
-        $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
-        $form->handleRequest($request);
+            $reservation = new Reservation();
+            $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($reservation);
-            $em->flush();
-            
-            $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
-            
-            return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
-        }
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $reservation->setUser($this->getUser());
+                $em->persist($reservation);
+                $em->flush();
 
-        return $this->render('reservation/new.html.twig', array(
-            'reservation' => $reservation,
-            'form' => $form->createView(),
-        ));
+                $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
+
+                return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
+            }
+
+            return $this->render('reservation/new.html.twig', array(
+                'reservation' => $reservation,
+                'form' => $form->createView(),
+            ));
+
     }
 
     /**
