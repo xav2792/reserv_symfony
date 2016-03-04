@@ -4,7 +4,8 @@ namespace AppBundle\Mailer;
 
 use Swift_Mailer;
 
-class Mailer {
+class Mailer
+{
 
     protected $mailer;
 
