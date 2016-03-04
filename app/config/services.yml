@@ -10,3 +10,7 @@ services:
     app.mailer:
         class: AppBundle\Mailer\Mailer
         arguments: ["@mailer"]
+
+    app.reservation.manager:
+        class: AppBundle\Service\ReservationManager
+        arguments: ["@doctrine.orm.entity_manager"]

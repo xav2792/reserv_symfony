@@ -62,27 +62,26 @@ class ReservationController extends Controller
      */
     public function newAction(Request $request)
     {
-
             $reservation = new Reservation();
             $form = $this->createForm('AppBundle\Form\ReservationType', $reservation);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $reservation->setUser($this->getUser());
-                $em->persist($reservation);
-                $em->flush();
 
-                $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
+                $reservationManager = $this->get('app.reservation.manager');
 
-                return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
+                if($reservationManager->createReservation($reservation, $this->getUser())) {
+                   // $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
+                    return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
+                } else {
+                    return $this->render('reservation/error.html.twig');
+                }
             }
 
             return $this->render('reservation/new.html.twig', array(
                 'reservation' => $reservation,
                 'form' => $form->createView(),
             ));
-
     }
 
     /**
@@ -128,7 +127,7 @@ class ReservationController extends Controller
                 'delete_form' => $deleteForm->createView(),
             ));
         }else{
-            return $this->render('reservation/error.html.twig');
+            return $this->render('field/error.html.twig');
         }
     }
 
@@ -152,7 +151,7 @@ class ReservationController extends Controller
 
             return $this->redirectToRoute('reservation_index');
         }else{
-            return $this->render('reservation/error.html.twig');
+            return $this->render('field/error.html.twig');
         }
 
     }
