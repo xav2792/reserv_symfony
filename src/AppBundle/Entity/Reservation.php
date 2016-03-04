@@ -199,4 +199,5 @@ class Reservation
     {
         return $this->user;
     }
+
 }
