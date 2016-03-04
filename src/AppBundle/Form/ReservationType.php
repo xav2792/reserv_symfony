@@ -20,6 +20,7 @@ class ReservationType extends AbstractType
 
         $builder
             ->add('date')
+            ->add('field')
             ->add('hour', ChoiceType::class, array('choices'  => array(
 +                '9' => 9,
 +                '10' => 10,
@@ -31,8 +32,8 @@ class ReservationType extends AbstractType
 +                '16' => 16,
 +                '17' => 17,
 +                '18' => 18,
-+                '19' => 19)))
-            ->add('field');
++                '19' => 19)));
+
 
     }
     

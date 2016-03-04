@@ -24,16 +24,6 @@ class ReservationController extends Controller
      */
     public function indexAction()
     {
-        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $em = $this->getDoctrine()->getManager();
-
-            $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
-
-            return $this->render('reservation/index.html.twig', array(
-                'reservations' => $reservations,
-            ));
-        }else
-        {
             $em = $this->getDoctrine()->getManager();
 
             $reservations = $em->getRepository('AppBundle:Reservation')->findByUser($this->getUser());
@@ -41,7 +31,7 @@ class ReservationController extends Controller
             return $this->render('reservation/index.html.twig', array(
                 'reservations' => $reservations,
             ));
-        }
+
 
     }
 
@@ -77,21 +67,21 @@ class ReservationController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $reservation->setUser($this->getUser());
-                $em->persist($reservation);
-                $em->flush();
 
-                $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
+                $reservationManager = $this->get('app.reservation.manager');
 
-                return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
+                if($reservationManager->createReservation($reservation, $this->getUser())) {
+                   // $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
+                    return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
+                } else {
+                    return $this->render('reservation/error.html.twig');
+                }
             }
 
             return $this->render('reservation/new.html.twig', array(
                 'reservation' => $reservation,
                 'form' => $form->createView(),
             ));
-
     }
 
     /**
@@ -137,7 +127,7 @@ class ReservationController extends Controller
                 'delete_form' => $deleteForm->createView(),
             ));
         }else{
-            return $this->render('reservation/error.html.twig');
+            return $this->render('field/error.html.twig');
         }
     }
 
@@ -161,7 +151,7 @@ class ReservationController extends Controller
 
             return $this->redirectToRoute('reservation_index');
         }else{
-            return $this->render('reservation/error.html.twig');
+            return $this->render('field/error.html.twig');
         }
 
     }

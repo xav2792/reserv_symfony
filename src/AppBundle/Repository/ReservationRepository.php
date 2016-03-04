@@ -10,4 +10,25 @@ namespace AppBundle\Repository;
  */
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $date
+     * @param $hour
+     * @param $field
+     * @return array
+     */
+    public function checkReservation($date, $hour, $field)
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r')
+            ->where('r.date = :date')
+            ->andWhere('r.hour = :hour')
+            ->andWhere('r.field = :field')
+            ->setParameters([
+                'date' => $date,
+                'hour' => $hour,
+                'field' => $field
+            ])
+            ->getQuery()
+            ->getArrayResult();
+    }
 }
