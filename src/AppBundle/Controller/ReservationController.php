@@ -46,6 +46,25 @@ class ReservationController extends Controller
     }
 
     /**
+     * Lists all Reservation entities.
+     *
+     * @Route("/all", name="reservation_all")
+     * @Method("GET")
+     */
+    public function allAction()
+    {
+            $em = $this->getDoctrine()->getManager();
+
+            $reservations = $em->getRepository('AppBundle:Reservation')->findAll();
+
+            return $this->render('reservation/index.html.twig', array(
+                'reservations' => $reservations,
+            ));
+
+
+    }
+
+    /**
      * Creates a new Reservation entity.
      *
      * @Route("/new", name="reservation_new")

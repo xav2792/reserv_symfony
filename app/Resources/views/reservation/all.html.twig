@@ -2,16 +2,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Liste de vos reservations</h1>
+    <h1>Liste des reservations</h1>
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Heure</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for reservation in reservations %}
