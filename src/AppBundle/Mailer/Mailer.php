@@ -17,7 +17,7 @@ class Mailer {
     {
         $message = \Swift_Message::newInstance()
                 ->setSubject('Hello Email')
-                ->setFrom('xav271275@gmail.com')
+                ->setFrom('rayvexx@gmail.com')
                 ->setTo($to);
 
         $message->setBody('ok');
