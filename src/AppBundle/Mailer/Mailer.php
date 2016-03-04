@@ -13,11 +13,11 @@ class Mailer {
         $this->mailer = $mailer;
     }
 
-    public function sendMail($to, $field, $date, $hour, $user) 
+    public function sendMail($to)
     {
         $message = \Swift_Message::newInstance()
                 ->setSubject('Hello Email')
-                ->setFrom('send@example.com')
+                ->setFrom('php@it-connect.fr')
                 ->setTo($to);
 
         $message->setBody('ok');

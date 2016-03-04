@@ -6,8 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use AppBundle\Entity\Reservation;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ReservationType extends AbstractType
 {
@@ -17,12 +18,19 @@ class ReservationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('date')
-            ->add('hour')
+            ->add('hour',TextType::class,array('label'=>'Choisir une heure de debut (une reservation dure une heure)'))
             ->add('field')
             ->add('user')
+
+
         ;
+        /*,ChoiceType::class,array('label'=>'Choisir une heure de début (une réservation dure une heure) ',
+        'multiple'=>true,
+                'choices'=>array(9=>'9', 10=>'10', 11=>'11' , 12=>'12' , 13=>'13' , 14>'14' , 15=>'15', 16=>'16', 17=>'17'),
+                'attr'=>array('style'=>'width:100px', 'customattr'=>'customdata')))*/
     }
     
     /**

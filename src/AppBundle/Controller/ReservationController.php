@@ -50,7 +50,7 @@ class ReservationController extends Controller
             $em->persist($reservation);
             $em->flush();
             
-            $this->get('app.mailer')->sendMail($this->getUser()->getEmail(), $reservation->getField(), $reservation->getDate(), $reservation->getHour(), $reservation->getUser());
+            $this->get('app.mailer')->sendMail($this->getUser()->getEmail());
             
             return $this->redirectToRoute('reservation_show', array('id' => $reservation->getId()));
         }
