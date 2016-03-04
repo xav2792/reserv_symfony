@@ -32,8 +32,8 @@ class ReservationType extends AbstractType
 +                '17' => 17,
 +                '18' => 18,
 +                '19' => 19)))
-            ->add('field')
-            ->add('user');
+            ->add('field');
+
     }
     
     /**
