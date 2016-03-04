@@ -99,23 +99,27 @@ class ReservationController extends Controller
      */
     public function editAction(Request $request, Reservation $reservation)
     {
-        $deleteForm = $this->createDeleteForm($reservation);
-        $editForm = $this->createForm('AppBundle\Form\ReservationType', $reservation);
-        $editForm->handleRequest($request);
+        if($this->getUser() == $reservation->getUser() || $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $deleteForm = $this->createDeleteForm($reservation);
+            $editForm = $this->createForm('AppBundle\Form\ReservationType', $reservation);
+            $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($reservation);
-            $em->flush();
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($reservation);
+                $em->flush();
 
-            return $this->redirectToRoute('reservation_edit', array('id' => $reservation->getId()));
+                return $this->redirectToRoute('reservation_edit', array('id' => $reservation->getId()));
+            }
+
+            return $this->render('reservation/edit.html.twig', array(
+                'reservation' => $reservation,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        }else{
+            return $this->render('reservation/error.html.twig');
         }
-
-        return $this->render('reservation/edit.html.twig', array(
-            'reservation' => $reservation,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
 
     /**
@@ -126,16 +130,21 @@ class ReservationController extends Controller
      */
     public function deleteAction(Request $request, Reservation $reservation)
     {
-        $form = $this->createDeleteForm($reservation);
-        $form->handleRequest($request);
+        if($this->getUser() == $reservation->getUser() || $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $form = $this->createDeleteForm($reservation);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($reservation);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($reservation);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('reservation_index');
+        }else{
+            return $this->render('reservation/error.html.twig');
         }
 
-        return $this->redirectToRoute('reservation_index');
     }
 
     /**
